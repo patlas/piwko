@@ -20,6 +20,17 @@
 *.so.*
 *.dylib
 
+#my
+*.map
+*.lst
+*.crf
+*.d
+*.o
+*.dep
+*.lnp
+Objects/*
+Listings/*
+
 # Executables
 *.exe
 *.out
