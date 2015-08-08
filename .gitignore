@@ -38,6 +38,8 @@ Listings/*
 *.i*86
 *.x86_64
 *.hex
-
+*._2i
+*.fed
+*.12p
 # Debug files
 *.dSYM/
