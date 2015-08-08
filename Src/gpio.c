@@ -35,6 +35,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
+#include "nokia_lcd.h"
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -63,14 +64,8 @@ void MX_GPIO_Init(void)
   __GPIOA_CLK_ENABLE();
   __GPIOC_CLK_ENABLE();
 
-  /*Configure GPIO pin : PA4 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  /*Configure GPIO pin : PA0-4 */
+  GPIO_InitStruct.Pin = CLK | DATA | DC | RES | SCE;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);

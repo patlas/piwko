@@ -365,7 +365,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F100xB</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\Drivers\STM32F1xx_HAL_Driver\Inc;..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Include;..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable;..\Global;..\Tasks</IncludePath>
+              <IncludePath>..\Inc;..\Drivers\STM32F1xx_HAL_Driver\Inc;..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Include;..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable;..\Global;..\Tasks;..\LCDlib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -577,6 +577,36 @@
               <FileName>heap_1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\portable\heap_1.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Tasks</GroupName>
+          <Files>
+            <File>
+              <FileName>task_LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Tasks\task_LCD.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>LCDlib</GroupName>
+          <Files>
+            <File>
+              <FileName>menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCDlib\menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>nokia_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCDlib\nokia_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCDlib\delay_port.c</FilePath>
             </File>
           </Files>
         </Group>

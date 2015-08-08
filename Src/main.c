@@ -45,10 +45,18 @@
 #include "semphr.h"
 
 /* USER CODE BEGIN Includes */
+#include "task_LCD.h"
+#include "nokia_lcd.h"
+
+#include "globals.h"
+
+
 
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
+
+QueueHandle_t keyQueue;
 
 /* USER CODE BEGIN PV */
 
@@ -83,6 +91,17 @@ void Blink2( void * pvParameters )
   }
 }
 
+
+Key_t getkey(void){
+	Key_t key = NO_KEY;
+	
+	if(pdTRUE != xQueueReceive(keyQueue,&key,100))
+		key = NO_KEY;
+	
+	return key;
+}
+
+
 int main(void)
 {
 
@@ -100,7 +119,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SPI1_Init();
+  //MX_SPI1_Init();
   MX_TIM1_Init();
 
   /* USER CODE BEGIN 2 */
@@ -111,8 +130,14 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	
+	keyQueue = xQueueCreate(3,sizeof(Key_t));
+	
+	
+	
 	xTaskCreate( Blink, "NAME", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY,NULL);
 	xTaskCreate( Blink2, "NAME2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY,NULL);
+	//xTaskCreate( task_LCD, "LCD", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY,NULL);
+	xTaskCreate( task_MENU, "MENU", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY,NULL);
 
 	vTaskStartScheduler();
 	
@@ -185,3 +210,60 @@ void assert_failed(uint8_t* file, uint32_t line)
 */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+
+
+
+
+
+Key_t getkey2(void)
+{
+	/*uint8_t key=NO_KEY;
+
+	IWDG_ReloadCounter();							// reset watchdoga
+	if(GPIO_ReadInputDataBit(JOY_PORT,JOY_U) == 0)	// nacisnieto przycisk UP
+		{
+			if(inc==increment_delay)				// przycisk jest "przytrzymywany"
+				delay_ms(auto_repeat_period);						// czestotliwosc "autopowtarzania" przycisku
+			while((GPIO_ReadInputDataBit(JOY_PORT,JOY_U) == 0) && (inc<increment_delay)) if(inc<increment_delay) inc++;
+			delay_ms(50);
+			key=KEY_UP;
+		}
+	else if(GPIO_ReadInputDataBit(JOY_PORT,JOY_D) == 0)	// nacisnieto przycisk DN
+		{
+			if(inc==increment_delay)
+				delay_ms(auto_repeat_period);
+			while((GPIO_ReadInputDataBit(JOY_PORT,JOY_D) == 0)&& (inc<increment_delay)) if(inc<increment_delay) inc++;
+			delay_ms(50);
+			key=KEY_DN;
+		}
+	else if(GPIO_ReadInputDataBit(JOY_PORT,JOY_L) == 0)	// nacisnieto przycisk LEFT
+		{
+			if(inc==increment_delay)
+				delay_ms(auto_repeat_period);
+			while((GPIO_ReadInputDataBit(JOY_PORT,JOY_L) == 0)&& (inc<increment_delay)) if(inc<increment_delay) inc++;
+			delay_ms(50);
+			key=KEY_L;
+		}
+	else if(GPIO_ReadInputDataBit(JOY_PORT,JOY_R) == 0)	// nacisnieto przycisk RIGHT
+		{
+			if(inc==increment_delay)
+				delay_ms(auto_repeat_period);
+			while((GPIO_ReadInputDataBit(JOY_PORT,JOY_R) == 0)&& (inc<increment_delay)) if(inc<increment_delay) inc++;
+			delay_ms(50);
+			key=KEY_R;
+		}
+	else if(GPIO_ReadInputDataBit(LED_PORT,JOY_OK) == 0)	// nacisnieto przycisk OK
+		{
+			while(GPIO_ReadInputDataBit(LED_PORT,JOY_OK) == 0) ;
+			delay_ms(50);
+			key=KEY_OK;
+		}
+	else
+	{
+		key=NO_KEY;
+		inc=0;
+	}
+	return(key);*/
+	return NO_KEY;
+}
